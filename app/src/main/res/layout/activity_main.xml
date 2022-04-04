@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welcomeback"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="48dp"
+        android:text="Football Collection"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="55dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/startbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="48dp"
+        android:backgroundTint="#F4DF35"
+        android:paddingVertical="18dp"
+        android:text="Start"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startbtn"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="48dp"
+        android:paddingVertical="18dp"
+        android:backgroundTint="#007755"
+        android:text="Collection"
+        android:textAllCaps="false"
+        android:id="@+id/collectionbtn"
+        android:textSize="24sp" />
+
+
+
+
+
+
+</RelativeLayout>
