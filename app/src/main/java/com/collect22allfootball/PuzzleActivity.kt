@@ -1,5 +1,6 @@
 package com.collect22allfootball
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.AssetManager
 import android.graphics.*
@@ -19,11 +20,15 @@ import java.io.InputStream
 import java.util.*
 import kotlin.collections.ArrayList
 
+
+@Suppress("DEPRECATION")
+
 class PuzzleActivity : AppCompatActivity() {
 
     var pieces: ArrayList<PuzzlePiece?>? = null
     var mCurrentPhotoPath: String? = null
     var mCurrentPhotoUri: String? = null
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puzzle)
@@ -91,9 +96,9 @@ class PuzzleActivity : AppCompatActivity() {
     }
 
     private fun splitImage(): ArrayList<PuzzlePiece?> {
-        val piecesNumber = 12
-        val rows = 4
-        val cols = 3
+        val piecesNumber = 30
+        val rows = 7
+        val cols = 5
         val imageView = findViewById<ImageView>(R.id.imageView)
         val pieces = ArrayList<PuzzlePiece?>(piecesNumber)
 
@@ -105,6 +110,7 @@ class PuzzleActivity : AppCompatActivity() {
         val scaledBitmapTop = dimensions[1]
         val scaledBitmapWidth = dimensions[2]
         val scaledBitmapHeight = dimensions[3]
+
         val croppedImageWidth = scaledBitmapWidth - 2 * Math.abs(scaledBitmapLeft)
         val croppedImageHeight = scaledBitmapHeight - 2 * Math.abs(scaledBitmapTop)
         val scaledBitmap =
@@ -167,76 +173,29 @@ class PuzzleActivity : AppCompatActivity() {
                     // top side piece
                     path.lineTo(pieceBitmap.width.toFloat(), offsetY.toFloat())
                 } else {
-                    // top bump
-                    path.lineTo(
-                        (offsetX + (pieceBitmap.width - offsetX) / 3).toFloat(),
-                        offsetY.toFloat()
-                    )
-                    path.cubicTo(
-                        (offsetX + (pieceBitmap.width - offsetX) / 6).toFloat(),
-                        (offsetY - bumpSize).toFloat(),
-                        (offsetX + (pieceBitmap.width - offsetX) / 6 * 5).toFloat(),
-                        (offsetY - bumpSize).toFloat(),
-                        (offsetX + (pieceBitmap.width - offsetX) / 3 * 2).toFloat(),
-                        offsetY.toFloat()
-                    )
+
                     path.lineTo(pieceBitmap.width.toFloat(), offsetY.toFloat())
+
                 }
                 if (col == cols - 1) {
                     // right side piece
                     path.lineTo(pieceBitmap.width.toFloat(), pieceBitmap.height.toFloat())
                 } else {
-                    // right bump
-                    path.lineTo(
-                        pieceBitmap.width.toFloat(),
-                        (offsetY + (pieceBitmap.height - offsetY) / 3).toFloat()
-                    )
-                    path.cubicTo(
-                        (pieceBitmap.width - bumpSize).toFloat(),
-                        (offsetY + (pieceBitmap.height - offsetY) / 6).toFloat(),
-                        (pieceBitmap.width - bumpSize).toFloat(),
-                        (offsetY + (pieceBitmap.height - offsetY) / 6 * 5).toFloat(),
-                        pieceBitmap.width.toFloat(),
-                        (offsetY + (pieceBitmap.height - offsetY) / 3 * 2).toFloat()
-                    )
+
                     path.lineTo(pieceBitmap.width.toFloat(), pieceBitmap.height.toFloat())
                 }
                 if (row == rows - 1) {
                     // bottom side piece
                     path.lineTo(offsetX.toFloat(), pieceBitmap.height.toFloat())
                 } else {
-                    // bottom bump
-                    path.lineTo(
-                        (offsetX + (pieceBitmap.width - offsetX) / 3 * 2).toFloat(),
-                        pieceBitmap.height.toFloat()
-                    )
-                    path.cubicTo(
-                        (offsetX + (pieceBitmap.width - offsetX) / 6 * 5).toFloat(),
-                        (pieceBitmap.height - bumpSize).toFloat(),
-                        (offsetX + (pieceBitmap.width - offsetX) / 6).toFloat(),
-                        (pieceBitmap.height - bumpSize).toFloat(),
-                        (offsetX + (pieceBitmap.width - offsetX) / 3).toFloat(),
-                        pieceBitmap.height.toFloat()
-                    )
+
                     path.lineTo(offsetX.toFloat(), pieceBitmap.height.toFloat())
                 }
                 if (col == 0) {
                     // left side piece
                     path.close()
                 } else {
-                    // left bump
-                    path.lineTo(
-                        offsetX.toFloat(),
-                        (offsetY + (pieceBitmap.height - offsetY) / 3 * 2).toFloat()
-                    )
-                    path.cubicTo(
-                        (offsetX - bumpSize).toFloat(),
-                        (offsetY + (pieceBitmap.height - offsetY) / 6 * 5).toFloat(),
-                        (offsetX - bumpSize).toFloat(),
-                        (offsetY + (pieceBitmap.height - offsetY) / 6).toFloat(),
-                        offsetX.toFloat(),
-                        (offsetY + (pieceBitmap.height - offsetY) / 3).toFloat()
-                    )
+
                     path.close()
                 }
 
@@ -311,9 +270,12 @@ class PuzzleActivity : AppCompatActivity() {
         if (isGameOver) {
             AlertDialog.Builder(this@PuzzleActivity)
                 .setTitle("You won .. !!")
+
                 .setMessage("you are win...\nIf you want a New Game..!!")
                 .setPositiveButton("Yes"){
                         dialog,_->
+
+
                     finish()
                     dialog.dismiss()
                 }

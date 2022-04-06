@@ -1,5 +1,6 @@
 package com.collect22allfootball
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Bitmap
@@ -13,6 +14,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import java.io.IOException
 
+@Suppress("DEPRECATION")
+@SuppressLint("StaticFieldLeak")
 class ImageAdapter(private val mContext: Context) : BaseAdapter() {
     private val am: AssetManager
     private var files: Array<String>? = null
@@ -29,6 +32,7 @@ class ImageAdapter(private val mContext: Context) : BaseAdapter() {
     }
 
     // create a new ImageView for each item referenced by the Adapter
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
         val v = LayoutInflater.from(mContext).inflate(R.layout.grid_element,null)
 
@@ -39,6 +43,7 @@ class ImageAdapter(private val mContext: Context) : BaseAdapter() {
         imageView.post {
             object : AsyncTask<Void?, Void?, Void?>() {
                 private var bitmap: Bitmap? = null
+
                 protected override fun doInBackground(vararg p0: Void?): Void? {
                     bitmap = getPicFromAsset(imageView, files!![position])
                     return null
